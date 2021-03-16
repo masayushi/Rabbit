@@ -14,18 +14,20 @@ public class rabbit : MonoBehaviour
     public float idoukyouri = 1;
 
     [Header("垂直跳躍高度"), Range(0, 10)]
-    public float jump = 15;
+    public float jump = 1;
 
     [Header("跳躍距離"), Range(0, 15)]
-    public float jumpkyouri = 1.2f;
+    public float jumpkyouri = 1f;
 
     [Header("檢查地板射線")]
-    public float lazer = 1f;
+    public float lazer = 0.5f;
 
     [Header("檢查射線位移")]
-    public Vector2 offset;
+    public Vector3 offset;
 
-
+    /// <summary>
+    /// 是否有碰到地板
+    /// </summary>
     private bool onground = true;
 
     private Rigidbody2D rig;
@@ -34,22 +36,47 @@ public class rabbit : MonoBehaviour
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
+        lazer = 0.5f;
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, Vector3.right);
-        Gizmos.DrawRay(transform.position, Vector3.left);
-        Gizmos.DrawRay(transform.position, Vector3.up);
-        Gizmos.DrawRay(transform.position, Vector3.down);
+        Gizmos.DrawRay(transform.position + offset, Vector3.right);
+        Gizmos.DrawRay(transform.position + offset, Vector3.left);
+        Gizmos.DrawRay(transform.position + offset, Vector3.down);
     }
+
+    /// <summary>
+    /// 是否碰到地板
+    /// </summary>
+    private bool Lkabe;
+
+    private bool Rkabe;
 
     private void Checkwall()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, lazer, 1 << 11);
+        RaycastHit2D hitL = Physics2D.Raycast(transform.position, Vector3.left, lazer);
 
-        print(hit.transform.name);
+        if (hitL && hitL.transform.name == "牆壁(左)" )
+        {
+            Lkabe = true;
+        }
+        else
+        {
+            Lkabe = false;
+        }
+
+        RaycastHit2D hitR = Physics2D.Raycast(transform.position, Vector3.left, lazer);
+
+        if (hitR && hitR.transform.name == "牆壁(右)")
+        {
+            Lkabe = true;
+        }
+        else
+        {
+            Lkabe = false;
+        }
     }
 
     /// <summary>
@@ -59,12 +86,13 @@ public class rabbit : MonoBehaviour
 
     private void Update()
     {
-        Idou();
+        Checkwall();
     }
 
     private void FixedUpdate()
     {
         Jump();
+        Idou();
     }
 
     /// <summary>
@@ -76,22 +104,40 @@ public class rabbit : MonoBehaviour
 
         float v = Input.GetAxisRaw("Vertical");
 
-        // rig.velocity = ((transform.forward + transform.forward) * idoukyouri * Time.deltaTime) + transform.up * rig.velocity.y;
+        rig.velocity = ((transform.forward + transform.forward) * idoukyouri * Time.deltaTime) + transform.up * rig.velocity.y;
 
-        // rig.AddForce(new Vector2(h * idoukyouri, 0), ForceMode2D.Force);
+        rig.AddForce(new Vector2(h * idoukyouri, 0), ForceMode2D.Force);
+
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            rig.AddForce(new Vector2(-15, 0), ForceMode2D.Impulse);
+        }
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            rig.AddForce(new Vector2(15, 0), ForceMode2D.Impulse);
+        }
+
+        print(transform.position);
 
     }
 
+    /// <summary>
+    /// 跳躍控制
+    /// </summary>
     private void Jump()
     {
 
-        if (Input.GetKeyUp(KeyCode.Space) && onground)
+        if (Input.GetKeyDown(KeyCode.Space) && onground)
         {
             onground = false;
 
-            // rig.AddForce(new Vector2(0, 15), ForceMode2D.Impulse);
+            rig.AddForce(new Vector2(0, 5), ForceMode2D.Impulse);
         }
 
-    }
+      Collider2D hit = Physics2D.OverlapCircle(transform.position + offset, lazer, 1 << 8);
 
+
+        if (hit) onground = true;
+    }
+}
 
