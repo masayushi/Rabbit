@@ -25,6 +25,15 @@ public class rabbit : MonoBehaviour
     [Header("檢查射線位移")]
     public Vector3 offset;
 
+    [Header("跳躍蓄力值")]
+    public float jumpPressure = 2f;
+
+    [Header("蓄力最小值")]
+    public float minijumpPressure = 3f;
+
+    [Header("蓄力最大值")]
+    public float maxjumpPressure = 5f;
+
     /// <summary>
     /// 是否有碰到地板
     /// </summary>
@@ -50,6 +59,8 @@ public class rabbit : MonoBehaviour
     /// <summary>
     /// 是否碰到地板
     /// </summary>
+    private bool Onground = true;
+
     private bool Lkabe;
 
     private bool Rkabe;
@@ -58,7 +69,7 @@ public class rabbit : MonoBehaviour
     {
         RaycastHit2D hitL = Physics2D.Raycast(transform.position, Vector3.left, lazer);
 
-        if (hitL && hitL.transform.name == "牆壁(左)" )
+        if (hitL && hitL.transform.name == "牆壁(左)")
         {
             Lkabe = true;
         }
@@ -126,18 +137,43 @@ public class rabbit : MonoBehaviour
     /// </summary>
     private void Jump()
     {
-
-        if (Input.GetKeyDown(KeyCode.Space) && onground)
+        if (onground)
         {
-            onground = false;
+            if (Input.GetButton("Jump"))
+            {
+                if (jumpPressure < maxjumpPressure)     // 如果當前蓄力值小於最大值
+                {
+                    jumpPressure += Time.deltaTime;     // 則每偵遞增當前蓄力值
+                }
+                else
+                {
+                    jumpPressure = maxjumpPressure;     // 達到最大值時，當前的蓄力值就等於最大蓄力值
+                }
+            }
 
-            rig.AddForce(new Vector2(0, 500), ForceMode2D.Force);
+            else   // 鬆開按鍵時
+            {
+                if (jumpPressure > 0f)
+                {
+                    //如果是輕輕按下就鬆開則把最小蓄力值賦予給當前的蓄力值
+                    //如果是按住不放則把上面遞增的值傳下來
+                    jumpPressure += minijumpPressure;
+                    //给一个向上速度
+                    rig.velocity = new Vector2(0f, jumpPressure);
+                    jumpPressure = 0f;  // 升空後將蓄力值重設為0
+                    Onground = false;   //在地面上設為否
+                }
+            }
+        }
+    }
+    void OnCollisionEnter(Collision other)
+    {
+        //检测是否碰撞到地面
+        if (other.gameObject.tag == "Ground")
+        {
+            onground = true;
         }
 
-      Collider2D hit = Physics2D.OverlapCircle(transform.position + offset, lazer, 1 << 8);
-
-
-        if (hit) onground = true;
     }
 }
 

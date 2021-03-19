@@ -744,6 +744,9 @@ MonoBehaviour:
   jumpkyouri: 1
   lazer: 0.1
   offset: {x: 0, y: 0, z: 0}
+  jumpPressure: 0
+  minijumpPressure: 3
+  maxjumpPressure: 5
 --- !u!50 &154220478
 Rigidbody2D:
   serializedVersion: 4
