@@ -104,17 +104,17 @@ public class rabbit : MonoBehaviour
 
         float v = Input.GetAxisRaw("Vertical");
 
-        rig.velocity = ((transform.forward + transform.forward) * idoukyouri * Time.deltaTime) + transform.up * rig.velocity.y;
+        rig.velocity = ((transform.forward) * idoukyouri * Time.deltaTime) + transform.up * rig.velocity.y;
 
         rig.AddForce(new Vector2(h * idoukyouri, 0), ForceMode2D.Force);
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            rig.AddForce(new Vector2(-15, 0), ForceMode2D.Impulse);
+            rig.AddForce(new Vector2(-250, 0), ForceMode2D.Force);
         }
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            rig.AddForce(new Vector2(15, 0), ForceMode2D.Impulse);
+            rig.AddForce(new Vector2(250, 0), ForceMode2D.Force);
         }
 
         print(transform.position);
@@ -131,7 +131,7 @@ public class rabbit : MonoBehaviour
         {
             onground = false;
 
-            rig.AddForce(new Vector2(0, 5), ForceMode2D.Impulse);
+            rig.AddForce(new Vector2(0, 500), ForceMode2D.Force);
         }
 
       Collider2D hit = Physics2D.OverlapCircle(transform.position + offset, lazer, 1 << 8);
