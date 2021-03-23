@@ -26,7 +26,7 @@ public class rabbit : MonoBehaviour
     public Vector3 offset;
 
     [Header("跳躍蓄力值")]
-    public float jumpPressure = 2f;
+    public float jumpPressure = 0f;
 
     [Header("蓄力最小值")]
     public float minijumpPressure = 3f;
@@ -34,10 +34,6 @@ public class rabbit : MonoBehaviour
     [Header("蓄力最大值")]
     public float maxjumpPressure = 5f;
 
-    /// <summary>
-    /// 是否有碰到地板
-    /// </summary>
-    private bool onground = true;
 
     private Rigidbody2D rig;
 
@@ -55,11 +51,15 @@ public class rabbit : MonoBehaviour
         Gizmos.DrawRay(transform.position + offset, Vector3.left);
         Gizmos.DrawRay(transform.position + offset, Vector3.down);
     }
+ 
+    /// <summary>
+    /// 是否有碰到地板
+    /// </summary>
+    private bool onground;
 
     /// <summary>
-    /// 是否碰到地板
+    /// 是否碰到牆壁
     /// </summary>
-    private bool Onground = true;
 
     private bool Lkabe;
 
@@ -82,17 +82,15 @@ public class rabbit : MonoBehaviour
 
         if (hitR && hitR.transform.name == "牆壁(右)")
         {
-            Lkabe = true;
+            Rkabe = true;
         }
         else
         {
-            Lkabe = false;
+            Rkabe = false;
         }
     }
 
-    /// <summary>
-    /// 控制系統
-    /// </summary>
+    #region 控制系統
 
 
     private void Update()
@@ -137,13 +135,13 @@ public class rabbit : MonoBehaviour
     /// </summary>
     private void Jump()
     {
-        if (onground)
+        if (onground = true)
         {
-            if (Input.GetButton("Jump"))
+            if (Input.GetButton("Jump") && onground)
             {
                 if (jumpPressure < maxjumpPressure)     // 如果當前蓄力值小於最大值
                 {
-                    jumpPressure += Time.deltaTime;     // 則每偵遞增當前蓄力值
+                    jumpPressure += Time.deltaTime *3f;     // 則每偵遞增當前蓄力值
                 }
                 else
                 {
@@ -161,19 +159,24 @@ public class rabbit : MonoBehaviour
                     //给一个向上速度
                     rig.velocity = new Vector2(0f, jumpPressure);
                     jumpPressure = 0f;  // 升空後將蓄力值重設為0
-                    Onground = false;   //在地面上設為否
+                    onground = false;   //在地面上設為否
                 }
             }
         }
     }
+    /// <summary>
+    /// 待找出問題
+    /// </summary>
+    /// <param name="other">沒有作用到</param>
     void OnCollisionEnter(Collision other)
     {
-        //检测是否碰撞到地面
-        if (other.gameObject.tag == "Ground")
+        //檢測是否碰撞到地面
+        if (other.gameObject.tag == "地板" &&　onground == false)
         {
-            onground = true;
+            onground = false;
         }
-
     }
-}
 
+    #endregion
+
+}
