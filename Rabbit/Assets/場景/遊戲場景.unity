@@ -652,9 +652,9 @@ GameObject:
   m_Component:
   - component: {fileID: 154220476}
   - component: {fileID: 154220475}
-  - component: {fileID: 154220477}
   - component: {fileID: 154220478}
   - component: {fileID: 154220479}
+  - component: {fileID: 154220477}
   m_Layer: 0
   m_Name: usagi_T
   m_TagString: Untagged
@@ -721,7 +721,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -7.011, y: -1.564, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2083226732}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -734,19 +735,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 154220474}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 117738253fd61664187cce5af39fcc15, type: 3}
+  m_Script: {fileID: 11500000, guid: b88891ba695b7a84b8994d709664cd38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rabbit: {fileID: 154220476}
-  idou: 0
-  idoukyouri: 0.5
-  jump: 1
-  jumpkyouri: 1
-  lazer: 0.1
-  offset: {x: 0, y: 0, z: 0}
-  jumpPressure: 0
-  minijumpPressure: 3
-  maxjumpPressure: 5
+  speed: 5
+  jumpForce: 7
+  feetPos: {fileID: 2083226732}
+  checkRadius: 0.3
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 256
+  jumpTime: 0.4
 --- !u!50 &154220478
 Rigidbody2D:
   serializedVersion: 4
@@ -762,8 +761,8 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: e47f0014aa7cc794a8708b152d879888, type: 2}
+  m_GravityScale: 2
+  m_Material: {fileID: 6200000, guid: b7d280ad3080aa049a442ffe2bc01156, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -885,7 +884,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -663, y: -251.21}
+  m_AnchoredPosition: {x: -662.85, y: -251.21}
   m_SizeDelta: {x: 7, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &737874084
@@ -1817,7 +1816,7 @@ GameObject:
   - component: {fileID: 1019270142}
   - component: {fileID: 1019270141}
   - component: {fileID: 1019270140}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: "\u7246\u58C1(\u53F3)"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1840,7 +1839,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -616.8, y: -250.36}
+  m_AnchoredPosition: {x: -617.16, y: -250.21}
   m_SizeDelta: {x: 7, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &1019270140
@@ -2086,5 +2085,35 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2083226731
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2083226732}
+  m_Layer: 0
+  m_Name: feetPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2083226732
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083226731}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.04, y: -0.44, z: -1.7130361}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 154220476}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

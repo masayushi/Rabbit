@@ -20,7 +20,7 @@ public class rabbit : MonoBehaviour
     public float jumpkyouri = 1f;
 
     [Header("檢查地板射線")]
-    public float lazer = 0.5f;
+    public float lazer = 1f;
 
     [Header("檢查射線位移")]
     public Vector3 offset;
@@ -41,7 +41,7 @@ public class rabbit : MonoBehaviour
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
-        lazer = 0.5f;
+        lazer = 1f;
     }
 
     private void OnDrawGizmos()
@@ -49,12 +49,15 @@ public class rabbit : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawRay(transform.position + offset, Vector3.right);
         Gizmos.DrawRay(transform.position + offset, Vector3.left);
-        Gizmos.DrawRay(transform.position + offset, Vector3.down);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(transform.position + offset, -Vector3.up);
     }
- 
+
     /// <summary>
     /// 是否有碰到地板
     /// </summary>
+
     private bool onground;
 
     /// <summary>
@@ -65,9 +68,10 @@ public class rabbit : MonoBehaviour
 
     private bool Rkabe;
 
+
     private void Checkwall()
     {
-        RaycastHit2D hitL = Physics2D.Raycast(transform.position, Vector3.left, lazer);
+        RaycastHit2D hitL = Physics2D.Raycast(transform.position, Vector3.left, lazer, 1 << 11);
 
         if (hitL && hitL.transform.name == "牆壁(左)")
         {
@@ -78,7 +82,7 @@ public class rabbit : MonoBehaviour
             Lkabe = false;
         }
 
-        RaycastHit2D hitR = Physics2D.Raycast(transform.position, Vector3.left, lazer);
+        RaycastHit2D hitR = Physics2D.Raycast(transform.position, -Vector3.left, lazer, 1 << 12);
 
         if (hitR && hitR.transform.name == "牆壁(右)")
         {
@@ -87,6 +91,17 @@ public class rabbit : MonoBehaviour
         else
         {
             Rkabe = false;
+        }
+
+        RaycastHit2D hitD = Physics2D.Raycast(transform.position, -Vector3.up, lazer, 1 << 8);
+
+        if (hitR && hitR.transform.name == "地板")
+        {
+            onground = true;
+        }
+        else
+        {
+            onground = false;
         }
     }
 
@@ -109,9 +124,9 @@ public class rabbit : MonoBehaviour
     /// </summary>
     private void Idou()
     {
-        float h = Input.GetAxisRaw("Horizontal");
+        float h = Input.GetAxis("Horizontal");
 
-        float v = Input.GetAxisRaw("Vertical");
+        float v = Input.GetAxis("Vertical");
 
         rig.velocity = ((transform.forward) * idoukyouri * Time.deltaTime) + transform.up * rig.velocity.y;
 
@@ -135,47 +150,23 @@ public class rabbit : MonoBehaviour
     /// </summary>
     private void Jump()
     {
-        if (onground = true)
+        if (onground)
         {
-            if (Input.GetButton("Jump") && onground)
+            if (Input.GetKey("Jump"))
             {
                 if (jumpPressure < maxjumpPressure)     // 如果當前蓄力值小於最大值
                 {
-                    jumpPressure += Time.deltaTime *3f;     // 則每偵遞增當前蓄力值
+                    jumpPressure += Time.deltaTime * 3f;     // 則每偵遞增當前蓄力值
                 }
                 else
                 {
                     jumpPressure = maxjumpPressure;     // 達到最大值時，當前的蓄力值就等於最大蓄力值
                 }
             }
+        }
 
-            else   // 鬆開按鍵時
-            {
-                if (jumpPressure > 0f)
-                {
-                    //如果是輕輕按下就鬆開則把最小蓄力值賦予給當前的蓄力值
-                    //如果是按住不放則把上面遞增的值傳下來
-                    jumpPressure += minijumpPressure;
-                    //给一个向上速度
-                    rig.velocity = new Vector2(0f, jumpPressure);
-                    jumpPressure = 0f;  // 升空後將蓄力值重設為0
-                    onground = false;   //在地面上設為否
-                }
-            }
-        }
     }
-    /// <summary>
-    /// 待找出問題
-    /// </summary>
-    /// <param name="other">沒有作用到</param>
-    void OnCollisionEnter(Collision other)
-    {
-        //檢測是否碰撞到地面
-        if (other.gameObject.tag == "地板" &&　onground == false)
-        {
-            onground = false;
-        }
-    }
+
 
     #endregion
 
