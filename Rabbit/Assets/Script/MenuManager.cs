@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
@@ -33,6 +34,9 @@ public class MenuManager : MonoBehaviour
         // 場景管理器 的 載入場景("場景名稱")
         // 場景管理器 的 載入場景(1)
         //SceneManager.LoadScene("遊戲場景");
+
+        SceneManager.LoadScene("地底場景Final");
+        
     }
 
     /// <summary>
@@ -44,4 +48,4 @@ public class MenuManager : MonoBehaviour
         //語法：應用程式.離開遊戲(); -> 應用程式 的 離開遊戲 
         Application.Quit();
     }
-    }
+}

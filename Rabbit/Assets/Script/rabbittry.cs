@@ -12,6 +12,9 @@ public class rabbittry : MonoBehaviour
     public float checkRadius;
     public LayerMask whatIsGround;
 
+    public bool slope;
+    public float lenth;
+
     private float jumpTimeCounter;
     public float jumpTime;
     private bool isJumping;
@@ -65,6 +68,41 @@ public class rabbittry : MonoBehaviour
         {
             isJumping = false;
         }
+
+        CheckWall();
     }
 
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(feetPos.position, Vector3.down * lenth);
+    }
+
+    private void CheckWall()
+    {
+        RaycastHit2D hit =  Physics2D.Raycast(feetPos.position, Vector3.down, lenth, 1 << 10);
+
+
+
+        if (hit && hit.transform.name == "斜坡")
+        {
+            slope = true;
+            print(transform.name);
+        }
+        else
+        {
+            slope = false;
+        }
+
+        if (slope == true)
+        {
+            speed = 0;
+        }
+        else
+        {
+            speed = 5;
+        }
+    }
 }

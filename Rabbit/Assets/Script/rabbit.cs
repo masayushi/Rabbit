@@ -150,9 +150,9 @@ public class rabbit : MonoBehaviour
     /// </summary>
     private void Jump()
     {
-        if (onground)
+        if (onground == true)
         {
-            if (Input.GetKey("Jump"))
+            if (Input.GetButton("Jump") && onground)
             {
                 if (jumpPressure < maxjumpPressure)     // 如果當前蓄力值小於最大值
                 {
@@ -163,9 +163,35 @@ public class rabbit : MonoBehaviour
                     jumpPressure = maxjumpPressure;     // 達到最大值時，當前的蓄力值就等於最大蓄力值
                 }
             }
-        }
 
+            else   // 鬆開按鍵時
+            {
+                if (jumpPressure > 0f)
+                {
+                    //如果是輕輕按下就鬆開則把最小蓄力值賦予給當前的蓄力值
+                    //如果是按住不放則把上面遞增的值傳下來
+                    jumpPressure += minijumpPressure;
+                    //给一个向上速度
+                    rig.velocity = new Vector2(0f, jumpPressure);
+                    jumpPressure = 0f;  // 升空後將蓄力值重設為0
+                    onground = false;   //在地面上設為否
+                }
+            }
+        }
     }
+    /// <summary>
+    /// 待找出問題
+    /// </summary>
+    /// <param name="other">沒有作用到</param>
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        //檢測是否碰撞到地面
+        if (other.gameObject.tag == "玩家")
+        {
+            onground = true;
+        }
+    }
+
 
 
     #endregion
