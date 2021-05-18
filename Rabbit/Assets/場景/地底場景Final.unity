@@ -156,7 +156,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -400.53, y: -230}
+  m_AnchoredPosition: {x: -274.52, y: -227.58}
   m_SizeDelta: {x: 5, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &30629099
@@ -741,7 +741,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -457.53, y: -230}
+  m_AnchoredPosition: {x: -331.52, y: -227.58}
   m_SizeDelta: {x: 5, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &273557654
@@ -846,6 +846,8 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
+  slope: 0
+  lenth: 0
   jumpTime: 0.4
 --- !u!58 &330689569
 CircleCollider2D:
@@ -2744,7 +2746,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 872011890}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -429, y: -242.66, z: 0}
+  m_LocalPosition: {x: -303.43, y: -231.73, z: 0}
   m_LocalScale: {x: 5.818238, y: 5.818238, z: 5.818238}
   m_Children: []
   m_Father: {fileID: 1237784593}
