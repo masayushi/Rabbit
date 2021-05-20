@@ -19,6 +19,8 @@ public class rabbittry : MonoBehaviour
     public float jumpTime;
     private bool isJumping;
 
+    private bool gameOver;
+
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
@@ -32,6 +34,7 @@ public class rabbittry : MonoBehaviour
 
     private void Update()
     {
+        #region 位移、翻面判定
         onground = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
 
         if (moveInput > 0)
@@ -70,7 +73,18 @@ public class rabbittry : MonoBehaviour
         }
 
         CheckWall();
+        #endregion
+
+
+        if (gameOver) return;
+        {
+            FixedUpdate();
+        }
+
+
     }
+
+
 
 
 
