@@ -35,7 +35,7 @@ public class MenuManager : MonoBehaviour
         // 場景管理器 的 載入場景(1)
         //SceneManager.LoadScene("遊戲場景");
 
-        SceneManager.LoadScene("地底場景Final");
+        SceneManager.LoadScene(1);
         
     }
 

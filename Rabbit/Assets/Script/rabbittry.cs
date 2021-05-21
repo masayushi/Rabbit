@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class rabbittry : MonoBehaviour
 {
@@ -19,10 +20,17 @@ public class rabbittry : MonoBehaviour
     public float jumpTime;
     private bool isJumping;
 
-    private bool gameOver;
+
+    private AudioSource aud;
+
+    [Header("跳躍音效")]
+    public AudioClip jumpsound;
+
+
 
     private void Start()
     {
+        aud = GetComponent<AudioSource>();
         rig = GetComponent<Rigidbody2D>();
     }
 
@@ -35,6 +43,7 @@ public class rabbittry : MonoBehaviour
     private void Update()
     {
         #region 位移、翻面判定
+
         onground = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
 
         if (moveInput > 0)
@@ -46,6 +55,7 @@ public class rabbittry : MonoBehaviour
         {
             transform.eulerAngles = new Vector3(0, 180, 0);
         }
+
 
         if (onground == true && Input.GetKeyDown(KeyCode.Space))
         {
@@ -67,27 +77,38 @@ public class rabbittry : MonoBehaviour
             }
         }
 
+        //防止二段跳
         if (Input.GetKeyUp(KeyCode.Space))
         {
             isJumping = false;
+            if (onground == false)
+            {
+                aud.PlayOneShot(jumpsound, Random.Range(0f, 0f));
+            }
         }
 
         CheckWall();
         #endregion
 
+        #region 音效調整(跳躍時按跳躍不再有音效)
 
-        if (gameOver) return;
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
         {
-            FixedUpdate();
+            if (isJumping == true)
+            {
+                aud.PlayOneShot(jumpsound, Random.Range(0.8f, 1f));
+            }
+        }
+        else if (onground == false)
+        {
+            aud.PlayOneShot(jumpsound, Random.Range(0f, 0f));
         }
 
+        #endregion
 
     }
 
-
-
-
-
+    #region 斜坡操作設定
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -96,10 +117,9 @@ public class rabbittry : MonoBehaviour
 
     private void CheckWall()
     {
-        RaycastHit2D hit =  Physics2D.Raycast(feetPos.position, Vector3.down, lenth, 1 << 10);
+        RaycastHit2D hit = Physics2D.Raycast(feetPos.position, Vector3.down, lenth, 1 << 10);
 
-
-
+        #region
         if (hit && hit.transform.name == "斜坡")
         {
             slope = true;
@@ -118,5 +138,11 @@ public class rabbittry : MonoBehaviour
         {
             speed = 5;
         }
+        #endregion
+
     }
+
+    #endregion
+
+
 }
