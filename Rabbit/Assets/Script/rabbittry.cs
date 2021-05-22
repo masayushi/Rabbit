@@ -26,6 +26,8 @@ public class rabbittry : MonoBehaviour
     [Header("跳躍音效")]
     public AudioClip jumpsound;
 
+ 
+
 
 
     private void Start()
@@ -113,13 +115,16 @@ public class rabbittry : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawRay(feetPos.position, Vector3.down * lenth);
+        Gizmos.DrawRay(feetPos.position, Vector3.left * lenth);
+        Gizmos.DrawRay(feetPos.position, Vector3.right * lenth);
     }
 
     private void CheckWall()
     {
         RaycastHit2D hit = Physics2D.Raycast(feetPos.position, Vector3.down, lenth, 1 << 10);
 
-        #region
+        #region 偵測斜坡
+
         if (hit && hit.transform.name == "斜坡")
         {
             slope = true;
@@ -138,7 +143,8 @@ public class rabbittry : MonoBehaviour
         {
             speed = 5;
         }
-        #endregion
+        #endregion 
+
 
     }
 

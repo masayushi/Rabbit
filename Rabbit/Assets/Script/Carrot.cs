@@ -1,17 +1,40 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Carrot : MonoBehaviour
 {
-    public GameObject gameOver;
+    public GameObject dialogBox;
+    public Text dialogText;
+    public string dialog;
+    public bool PlayerInRange;
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void Start()
     {
-        if (other.gameObject.CompareTag("玩家"))
-        {
-            
-        }
+
     }
 
+    private void Update()
+    {
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("玩家"))
+        {
+            PlayerInRange = true;
+        }
+        else if (PlayerInRange == true)
+        {
+            if (dialogBox.activeInHierarchy)
+            {
+                dialogBox.SetActive(true);
+            }
+            else
+            {
+                dialogBox.SetActive(false);
+                dialogText.text = dialog;
+            }
+        }
+    }
 }
