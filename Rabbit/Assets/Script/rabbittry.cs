@@ -108,6 +108,7 @@ public class rabbittry : MonoBehaviour
 
         #endregion
 
+
     }
 
     #region 斜坡操作設定
@@ -125,27 +126,11 @@ public class rabbittry : MonoBehaviour
 
         #region 偵測斜坡
 
-        if (hit && hit.transform.name == "斜坡")
-        {
-            slope = true;
-            print(transform.name);
-        }
-        else
-        {
-            slope = false;
-        }
+        if (hit && hit.transform.name == "斜坡") {slope = true;}  else {slope = false;}
 
-        if (slope == true)
-        {
-            speed = 0;
-        }
-        else
-        {
-            speed = 5;
-        }
+        if (slope == true){speed = 0;}  else {speed = 5;}
+        
         #endregion 
-
-
     }
 
     #endregion
