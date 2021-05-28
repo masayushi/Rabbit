@@ -8,18 +8,19 @@ ScriptsOnlyBuild:
     - SceneChanger
     - rabbittry
     Unity.2D.Tilemap.Editor.dll:
-    - UnityEditor.Tilemaps.GridBrush
-    - UnityEditor.Tilemaps.GridPaintPaletteClipboard
-    - UnityEditor.Tilemaps.GridPaintPaletteWindow
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
     - UnityEditor.Tilemaps.GridPalettes
-    - UnityEditor.Tilemaps.PaintableSceneViewGrid
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
+    UnityEditor.Graphs.dll:
+    - UnityEditor.Graphs.AnimationBlendTree.Graph
+    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.Graph
+    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
-    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
@@ -73,15 +74,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10170}
     - Class: 114
+      Script: {instanceID: 10190}
+    - Class: 114
       Script: {instanceID: 10284}
     - Class: 114
-      Script: {instanceID: 10820}
+      Script: {instanceID: 10830}
     - Class: 114
-      Script: {instanceID: 10926}
+      Script: {instanceID: 10938}
     - Class: 114
-      Script: {instanceID: 11104}
+      Script: {instanceID: 11116}
     - Class: 114
-      Script: {instanceID: 11466}
+      Script: {instanceID: 11482}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -152,19 +155,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9892}
     - Class: 114
+      Script: {instanceID: 10170}
+    - Class: 114
+      Script: {instanceID: 10190}
+    - Class: 114
       Script: {instanceID: 10284}
     - Class: 114
-      Script: {instanceID: 10644}
+      Script: {instanceID: 10654}
     - Class: 114
-      Script: {instanceID: 10820}
+      Script: {instanceID: 10830}
     - Class: 114
-      Script: {instanceID: 10926}
+      Script: {instanceID: 10938}
     - Class: 114
-      Script: {instanceID: 11104}
+      Script: {instanceID: 11116}
     - Class: 114
-      Script: {instanceID: 11464}
+      Script: {instanceID: 11480}
     - Class: 114
-      Script: {instanceID: 11466}
+      Script: {instanceID: 11482}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -221,11 +228,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10284}
     - Class: 114
-      Script: {instanceID: 10644}
+      Script: {instanceID: 10654}
     - Class: 114
-      Script: {instanceID: 11104}
+      Script: {instanceID: 11116}
     - Class: 114
-      Script: {instanceID: 11466}
+      Script: {instanceID: 11482}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -395,13 +402,13 @@ ScriptsOnlyBuild:
     className: AnimationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: c15731e1870d9f8c7700ab577cfbeeb7
+      Hash: f9dd81269c0fc2b12450407c7cdfa8b8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SceneChanger
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 6b78c146792eba33a5dd7e8706e12084
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MenuManager
@@ -471,6 +478,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: SignalTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LeanTween
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -704,4 +717,4 @@ ScriptsOnlyBuild:
   - "Assets/\u5834\u666F/\u9078\u55AE.unity"
   - "Assets/\u5834\u666F/\u5730\u5E95\u5834\u666FFinal.unity"
   - "Assets/\u5834\u666F/\u5E73\u5730\u5834\u666F.unity"
-  playerPath: C:/Users/YUSHI/Documents/GitHub/Rabbit/Rabbit/Rabbit.web
+  playerPath: C:/Users/YUSHI/Documents/GitHub/Rabbit/Web
