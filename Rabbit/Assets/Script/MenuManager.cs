@@ -44,7 +44,7 @@ public class MenuManager : MonoBehaviour
     /// <summary>
     /// 離開遊戲
     /// </summary>
-    private void Quitgame()
+    private void QuitGame()
     {
         //退出遊戲
         //語法：應用程式.離開遊戲(); -> 應用程式 的 離開遊戲 
