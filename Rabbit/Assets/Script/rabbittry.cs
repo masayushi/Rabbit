@@ -126,7 +126,7 @@ public class rabbittry : MonoBehaviour
 
         #region 偵測斜坡
 
-        if (hit && hit.transform.name == "斜坡") {slope = true;}  else {slope = false;}
+        if (hit && hit.transform.name == "斜坡" || hit && hit.transform.name == "斜坡地板區(斜坡)" || hit && hit.transform.name == "第一斜坡(斜坡)") {slope = true;}  else {slope = false;}
 
         if (slope == true){speed = 0;}  else {speed = 5;}
         
