@@ -89,7 +89,7 @@ public class rabbittry : MonoBehaviour
             }
         }
 
-        CheckWall();
+        CheckSlope();
         #endregion
 
         #region 音效調整(跳躍時按跳躍不再有音效)
@@ -120,7 +120,7 @@ public class rabbittry : MonoBehaviour
         Gizmos.DrawRay(feetPos.position, Vector3.right * lenth);
     }
 
-    private void CheckWall()
+    private void CheckSlope()
     {
         RaycastHit2D hit = Physics2D.Raycast(feetPos.position, Vector3.down, lenth, 1 << 10);
 
